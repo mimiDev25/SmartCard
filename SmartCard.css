@@ -1,0 +1,82 @@
+html, body{
+  background: linear-gradient(to bottom right, #f7faff, #ffffff);
+  height: 100%; 
+}
+:root{
+  --radius:10px;
+  --text: Inter, Segoe UI, Calibri;
+  --color:#2e2e2e
+}
+fieldset, input, button, header, article, textarea {
+  border-radius: var(--radius);
+  font-family: var(--text);
+  color: var(--color);
+  box-sizing: border-box;
+}
+#maindiv{
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px;
+  gap: 24px;
+}
+article{
+  width: 100%;
+  height: 400px; 
+  border: 1px solid #e5e5e5;
+  background-color: white;
+  min-height: 200px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+#answerCard{
+  border-top: 30px solid #b8f2e6; 
+}
+#questionCard{
+  border-top: 30px solid #f2b544;
+  border-text: "Question";
+}
+fieldset{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+  border: 1px solid #dcdcdc;
+}
+#inputQ{
+  height: 30px;
+}
+#inputA{
+  height: 70px;
+}
+input, textarea{
+  border: 1px solid #dcdcdc;
+  box-shadow: 0 0 5px rgba(0,0,0,0.08); 
+  transition: 0.3s;
+}
+textarea:focus, input:focus{
+  outline: none;
+  border: 1px solid #ff7f7f;
+  box-shadow: 0 0 5px rgba(255, 127, 127, 0.5);
+}
+#addQuestion{
+  height:44px;
+  width: 20%;
+  align-self: center;
+  margin-top: 24px;
+  border: none;
+  background: #2bb4c0;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition: 0.2s ease;
+}
+#addQuestion:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}
+#addQuestion:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.10);
+}
