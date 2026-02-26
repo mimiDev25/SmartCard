@@ -1,6 +1,6 @@
 html, body{
   background: linear-gradient(to bottom right, #f7faff, #ffffff);
-  height: 100%; 
+  min-height: 100vh; 
 }
 :root{
   --radius:10px;
