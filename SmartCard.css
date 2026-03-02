@@ -1,6 +1,6 @@
 html, body{
   background: linear-gradient(to bottom right, #f7faff, #ffffff);
-  min-height: 100vh; 
+  height: 100%; 
 }
 :root{
   --radius:10px;
@@ -21,20 +21,38 @@ fieldset, input, button, header, article, textarea {
   padding: 24px;
   gap: 24px;
 }
+#FlexQA{
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+#QA{
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+}
+#controls{
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
 article{
-  width: 100%;
-  height: 400px; 
+  flex: 1;
+  min-width: 350px ; 
   border: 1px solid #e5e5e5;
   background-color: white;
-  min-height: 200px;
+  min-height: 300px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  padding: 15px;
 }
 #answerCard{
   border-top: 30px solid #b8f2e6; 
 }
 #questionCard{
   border-top: 30px solid #f2b544;
-  border-text: "Question";
+  font-weight: bolder;
+  font-size: 18px;
+  color: black
 }
 fieldset{
   display: flex;
@@ -79,4 +97,46 @@ textarea:focus, input:focus{
 #addQuestion:active {
   transform: translateY(0);
   box-shadow: 0 3px 8px rgba(0,0,0,0.10);
+}
+#previous, #next, #delete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 20px;
+  font-weight: 700;
+  font-size: 18px;
+  color: #2e2e2e;
+  background: #e8f5f7;       
+  border: 1px solid #d4e7ea;  
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+#previous:hover,
+#next:hover,
+#delete:hover {
+  background: #dff1f3; 
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+#previous:active,
+#next:active,
+#delete:active {
+  background: #d4e7ea;  
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.10);
+}
+#delete {
+  background: #f4b4b4;     
+  border-color: #eaa3a3;
+  color: black;
+}
+
+#delete:hover {
+  background: #f29d9d;      
+}
+
+#delete:active {
+  background: #e88c8c;  
 }
