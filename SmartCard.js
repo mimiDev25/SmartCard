@@ -5,6 +5,7 @@ const deleteButton = document.querySelector("#delete");
 const Qinput = document.querySelector("#inputQ");
 const Ainput = document.querySelector("#inputA");
 const submit = document.querySelector("#addQuestion");
+const preButton = document.querySelector("#previous");
 //validation
 function validate(x){
   if(x===""){
@@ -59,6 +60,17 @@ nextButton.addEventListener("click", () => {
   displayQuestion(currentindex);
   displayAnswer(currentindex);
 });
+preButton.addEventListener("click", () =>{
+  if (cards.length === 0) return;
+  if(currentindex===0){
+    currentindex = cards.length-1;
+  }
+  else{
+    currentindex = currentindex-1;
+  }
+  displayQuestion(currentindex);
+  displayAnswer(currentindex);
+});
 //deletCard
 deleteButton.addEventListener("click", ()=>{
   cards.splice(currentindex, 1);
@@ -90,3 +102,5 @@ function displayAnswer(i){
   Acard.textContent = cards[i].A
 }
 displayAnswer(currentindex)
+
+
