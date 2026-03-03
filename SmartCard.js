@@ -104,8 +104,6 @@ function displayQuestion(i){
   }
   Qcard.textContent = cards[i].Q
 }
-displayQuestion(currentindex)
-
 //display Answer
 function displayAnswer(i){
   if(cards.length === 0){
@@ -114,7 +112,6 @@ function displayAnswer(i){
   }
   Acard.textContent = cards[i].A
 }
-displayAnswer(currentindex)
 
 
 
