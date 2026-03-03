@@ -63,9 +63,6 @@ nextButton.addEventListener("click", () => {
 let cards = [
 ]
 //addNewCard to Array
-function addCard(question, answer){
-  cards.push({Q: question, A: answer});
-};
 function pushCard(x,y){
   let obj = {Q: x, A: y};
   cards.push(obj);
@@ -101,12 +98,20 @@ const read = (input) => {
 };
 //display Question
 function displayQuestion(i){
+  if(cards.length === 0){
+    Qcard.textContent = "";
+    return;
+  }
   Qcard.textContent = cards[i].Q
 }
 displayQuestion(currentindex)
 
 //display Answer
 function displayAnswer(i){
+  if(cards.length === 0){
+    Acard.textContent = "";
+    return;
+  }
   Acard.textContent = cards[i].A
 }
 displayAnswer(currentindex)
