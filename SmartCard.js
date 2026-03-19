@@ -9,16 +9,19 @@ const submit = document.querySelector("#addQuestion");
 const preButton = document.querySelector("#previous");
 
 //EventListeners
-submit.addEventListener("click", () =>{
-  const check1 = read(Ainput);
-  const check2 = read(Qinput);
-  if(!check1 || !check2){
-		alertF();
-		return;
-	}
-  pushCard(check2, check1);
-  render();
+Qinput.addEventListener("keydown", (e)=>{
+  if(e.key==="Enter"){
+    e.preventDefault();
+    Ainput.focus();
+  }
 });
+Ainput.addEventListener("keydown", (e)=>{
+  if(e.key==="Enter"){
+    e.preventDefault();
+    submitForm();
+  }
+  });
+submit.addEventListener("click", submitForm);
 
 preButton.addEventListener("click", () =>{
   if(state.currentindex===0){
@@ -63,6 +66,17 @@ function render(){
 	}
 	Qcard.textContent = card.Q;
 	Acard.textContent = card.A;
+}
+//submit form
+function submitForm(){
+	const check1 = read(Ainput);
+	const check2 = read(Qinput);
+	if(!check1 || !check2){
+		alertF();
+		return;
+	}
+  pushCard(check2, check1);
+  render();
 }
 //addNewCard to Array
 function pushCard(x,y){
