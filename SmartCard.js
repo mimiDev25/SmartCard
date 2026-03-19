@@ -9,64 +9,80 @@ const submit = document.querySelector("#addQuestion");
 const preButton = document.querySelector("#previous");
 
 //EventListeners
-submit.addEventListener("click", () =>{
-  const check1 = read(Ainput);
-  const check2 = read(Qinput);
-  if(!check1 || !check2) return;
-  pushCard(check2, check1);
-  
-  displayQuestion(currentindex);
-  displayAnswer(currentindex);
-  
-  Ainput.value="";
-  Qinput.value="";
+Qinput.addEventListener("keydown", (e)=>{
+  if(e.key==="Enter"){
+    e.preventDefault();
+    Ainput.focus();
+  }
 });
+Ainput.addEventListener("keydown", (e)=>{
+  if(e.key==="Enter"){
+    e.preventDefault();
+    submitForm();
+  }
+  });
+submit.addEventListener("click", submitForm);
 
 preButton.addEventListener("click", () =>{
-  if (cards.length === 0) return;
-  if(currentindex===0){
-    currentindex = cards.length-1;
+  if(state.currentindex===0){
+    state.currentindex = state.cards.length-1;
   }
   else{
-    currentindex = currentindex-1;
+    state.currentindex = state.currentindex-1;
   }
-  displayQuestion(currentindex);
-  displayAnswer(currentindex);
+  render();
 });
 
 deleteButton.addEventListener("click", ()=>{
-  cards.splice(currentindex, 1);
-  if(cards.length-1 < currentindex){
-    currentindex = 0
+  state.cards.splice(state.currentindex, 1);
+  if(state.cards.length-1 < state.currentindex){
+    state.currentindex = 0
   }
-  if(cards.length===0){
-    Qcard.textContent = "";
-    Acard.textContent = "";
-  }
-  displayQuestion(currentindex);
-  displayAnswer(currentindex);
+	render();
 });
 
 nextButton.addEventListener("click", () => {
   //built this if/else all by myself! whoop!whoop!
-  if (cards.length-1 > currentindex){
-    currentindex++
+  if (state.cards.length-1 > state.currentindex){
+    state.currentindex++
   }
   else{
-    currentindex = 0;
+    state.currentindex = 0;
   }
-  displayQuestion(currentindex);
-  displayAnswer(currentindex);
+	render();
 });
-//main array and array methods
-//main array for Q.&A.
-let cards = [
-]
+//STATE OBJECT
+const state = {
+	cards: [],
+	currentindex: 0,
+}
+//RENDER FUNCTION
+function render(){
+	const card = state.cards[state.currentindex];
+	if(!card){
+		Qcard.textContent = "";
+		Acard.textContent = "";
+		return;
+	}
+	Qcard.textContent = card.Q;
+	Acard.textContent = card.A;
+}
+//submit form
+function submitForm(){
+	const check1 = read(Ainput);
+	const check2 = read(Qinput);
+	if(!check1 || !check2){
+		alertF();
+		return;
+	}
+  pushCard(check2, check1);
+  render();
+}
 //addNewCard to Array
 function pushCard(x,y){
   let obj = {Q: x, A: y};
-  cards.push(obj);
-  currentindex = cards.length-1;
+  state.cards.push(obj);
+  state.currentindex = state.cards.length-1;
 }
 //validation and alert
 //validation
@@ -80,10 +96,6 @@ function validate(x){
 };
 //alert function
 const alertF = () => alert("Please enter a question and an answer.")
-
-//counterstate!!
-let currentindex = 0
-
 //DOM interactions
 //read input
 const read = (input) => {
@@ -93,25 +105,8 @@ const read = (input) => {
     return text
   }
   else{
-    alertF();
+    return false;
   }
 };
-//display Question
-function displayQuestion(i){
-  if(cards.length === 0){
-    Qcard.textContent = "";
-    return;
-  }
-  Qcard.textContent = cards[i].Q
-}
-//display Answer
-function displayAnswer(i){
-  if(cards.length === 0){
-    Acard.textContent = "";
-    return;
-  }
-  Acard.textContent = cards[i].A
-}
-
 
 
