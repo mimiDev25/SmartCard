@@ -66,6 +66,8 @@ function render(){
 	}
 	Qcard.textContent = card.Q;
 	Acard.textContent = card.A;
+	Ainput.value = "";
+	Qinput.value = "";
 }
 //submit form
 function submitForm(){
