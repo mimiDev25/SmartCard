@@ -36,7 +36,7 @@ fieldset, input, button, header, article, textarea {
   justify-content: center;
   gap: 12px;
 }
-article{
+.NoEditCard{
   flex: 1;
   min-width: 350px ; 
   border: 1px solid #e5e5e5;
@@ -44,16 +44,21 @@ article{
   min-height: 300px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   padding: 15px;
+  border-top: 30px solid;
 }
 #answerCard{
-  border-top: 30px solid #b8f2e6; 
+  border-top-color: #b8f2e6; 
 }
 #questionCard{
-  border-top: 30px solid #f2b544;
+  border-top-color: #f2b544;
   font-weight: bolder;
   font-size: 18px;
   color: #606060;
   text-align: center;
+}
+/* edit card styling must go below previous styling to change border color during edits. */
+#answerCard.editCard, #questionCard.editCard{
+  border-top-color: #ecf2f1;
 }
 fieldset{
   display: flex;
@@ -99,7 +104,7 @@ textarea:focus, input:focus{
   transform: translateY(0);
   box-shadow: 0 3px 8px rgba(0,0,0,0.10);
 }
-#previous, #next, #delete {
+.CardB {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -114,16 +119,12 @@ textarea:focus, input:focus{
   cursor: pointer;
   transition: 0.2s ease;
 }
-#previous:hover,
-#next:hover,
-#delete:hover {
+.CardB:hover {
   background: #dff1f3; 
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
-#previous:active,
-#next:active,
-#delete:active {
+.CardB:active d{
   background: #d4e7ea;  
   transform: translateY(0);
   box-shadow: 0 2px 6px rgba(0,0,0,0.10);

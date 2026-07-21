@@ -1,14 +1,28 @@
 //DOM APIs
 const Qcard = document.querySelector("#questionCard");
 const Acard = document.querySelector("#answerCard");
-const nextButton = document.querySelector("#next");
-const deleteButton = document.querySelector("#delete");
 const Qinput = document.querySelector("#inputQ");
 const Ainput = document.querySelector("#inputA");
 const submit = document.querySelector("#addQuestion");
 const preButton = document.querySelector("#previous");
+const nextButton = document.querySelector("#next");
+const deleteButton = document.querySelector("#delete");
+const editButton = document.querySelector("#edit");
+
+// edit state for styling
+let edit = true
+
+const toggleEdit = () =>{
+  edit = !edit;
+  if(edit){
+    Qcard.classList.add("editCard");
+    Acard.classList.add("editCard");
+  }
+}
+
 
 //EventListeners
+// "enter" key in input boxes
 Qinput.addEventListener("keydown", (e)=>{
   if(e.key==="Enter"){
     e.preventDefault();
@@ -21,8 +35,9 @@ Ainput.addEventListener("keydown", (e)=>{
     submitForm();
   }
   });
+// submit button
 submit.addEventListener("click", submitForm);
-
+// previous button state change
 preButton.addEventListener("click", () =>{
   if(state.currentindex===0){
     state.currentindex = state.cards.length-1;
@@ -32,17 +47,19 @@ preButton.addEventListener("click", () =>{
   }
   render();
 });
-
+// delete button state change
 deleteButton.addEventListener("click", ()=>{
   state.cards.splice(state.currentindex, 1);
   if(state.cards.length-1 < state.currentindex){
     state.currentindex = 0
+    // if deleted item is the last item, loop around to index 0; otherwise, the next item falls back into index of the first and currentindex can stay the same.
   }
 	render();
 });
 
 nextButton.addEventListener("click", () => {
   //built this if/else all by myself! whoop!whoop!
+  //if the array length is greater than the currentindex, increase by 1; if it is smaller or equal, loop back to zero so couter is not falling off the end of the array.
   if (state.cards.length-1 > state.currentindex){
     state.currentindex++
   }
@@ -51,12 +68,25 @@ nextButton.addEventListener("click", () => {
   }
 	render();
 });
+
+// EDIT BUTTON
+//* On click this should toggle edit state,
+// place QA item in input boxes,
+// move cursor to input boxes,
+// replace current index item with edited item,
+// render.*//
+editButton.addEventListener("click", () =>{
+
+
+})
+
 //STATE OBJECT
 const state = {
 	cards: [],
 	currentindex: 0,
 }
-//RENDER FUNCTION
+
+//RENDER FUNCTION occurs after "submit form"
 function render(){
 	const card = state.cards[state.currentindex];
 	if(!card){
