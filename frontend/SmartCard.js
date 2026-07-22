@@ -10,15 +10,24 @@ const deleteButton = document.querySelector("#delete");
 const editButton = document.querySelector("#edit");
 
 // edit state for styling
-let edit = true
+let edit = false
 
 const toggleEdit = () =>{
   edit = !edit;
   if(edit){
     Qcard.classList.add("editCard");
     Acard.classList.add("editCard");
+  } else{
+    Qcard.classList.remove("editCard");
+    Acard.classList.remove("editCard");
+    Ainput.value = "";
+    Qinput.value = "";
+    Ainput.blur();
+    Qinput.blur();
   }
-}
+};
+
+
 
 
 //EventListeners
@@ -50,7 +59,7 @@ preButton.addEventListener("click", () =>{
 // delete button state change
 deleteButton.addEventListener("click", ()=>{
   state.cards.splice(state.currentindex, 1);
-  if(state.cards.length-1 < state.currentindex){
+  if(state.currentindex >= state.cards.length){
     state.currentindex = 0
     // if deleted item is the last item, loop around to index 0; otherwise, the next item falls back into index of the first and currentindex can stay the same.
   }
@@ -60,12 +69,13 @@ deleteButton.addEventListener("click", ()=>{
 nextButton.addEventListener("click", () => {
   //built this if/else all by myself! whoop!whoop!
   //if the array length is greater than the currentindex, increase by 1; if it is smaller or equal, loop back to zero so couter is not falling off the end of the array.
-  if (state.cards.length-1 > state.currentindex){
-    state.currentindex++
-  }
-  else{
-    state.currentindex = 0;
-  }
+  state.currentindex = (state.currentindex + 1) % state.cards.length;
+  // if (state.cards.length-1 > state.currentindex){
+  //   state.currentindex++
+  // }
+  // else{
+  //   state.currentindex = 0;
+  // }
 	render();
 });
 
@@ -76,9 +86,19 @@ nextButton.addEventListener("click", () => {
 // replace current index item with edited item,
 // render.*//
 editButton.addEventListener("click", () =>{
-
-
-})
+  toggleEdit();
+   if(edit){
+    Qinput.value = state.cards[state.currentindex].Q;
+    Ainput.value = state.cards[state.currentindex].A;
+    Qinput.focus();
+    } return;
+    
+  //   Qinput.value = "";
+  //   Ainput.value = "";
+  //   Qinput.blur();
+  //   Ainput.blur();
+  // }
+});
 
 //STATE OBJECT
 const state = {
@@ -98,6 +118,8 @@ function render(){
 	Acard.textContent = card.A;
 	Ainput.value = "";
 	Qinput.value = "";
+  Ainput.blur();
+  Qinput.blur();
 }
 //submit form
 function submitForm(){
@@ -113,19 +135,24 @@ function submitForm(){
 //addNewCard to Array
 function pushCard(x,y){
   let obj = {Q: x, A: y};
+  if(edit){
+    state.cards[state.currentindex] = obj;
+    toggleEdit();
+  }else{
   state.cards.push(obj);
   state.currentindex = state.cards.length-1;
+  }
 }
 //validation and alert
 //validation
-function validate(x){
-  if(x===""){
-    return false;
-  }
-  else{
-    return true;
-  }
-};
+const validate = x => x !== "";
+  // if(x===""){
+  //   return false;
+  // }
+  // else{
+  //   return true;
+  // }
+
 //alert function
 const alertF = () => alert("Please enter a question and an answer.")
 //DOM interactions
