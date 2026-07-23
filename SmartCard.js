@@ -63,19 +63,20 @@ deleteButton.addEventListener("click", ()=>{
     state.currentindex = 0
     // if deleted item is the last item, loop around to index 0; otherwise, the next item falls back into index of the first and currentindex can stay the same.
   }
+  localStorage.setItem("cards", JSON.stringify(state.cards));
 	render();
 });
 
 nextButton.addEventListener("click", () => {
   //built this if/else all by myself! whoop!whoop!
   //if the array length is greater than the currentindex, increase by 1; if it is smaller or equal, loop back to zero so couter is not falling off the end of the array.
-  state.currentindex = (state.currentindex + 1) % state.cards.length;
-  // if (state.cards.length-1 > state.currentindex){
-  //   state.currentindex++
-  // }
-  // else{
-  //   state.currentindex = 0;
-  // }
+  // state.currentindex = (state.currentindex + 1) % state.cards.length;
+  if (state.cards.length-1 > state.currentindex){
+    state.currentindex++
+  }
+  else{
+    state.currentindex = 0;
+  }
 	render();
 });
 
@@ -105,6 +106,13 @@ const state = {
 	cards: [],
 	currentindex: 0,
 }
+const saved = JSON.parse(localStorage.getItem("cards"));
+if (saved){
+  state.cards = saved;
+  state.currentindex = 0;
+  render();
+};
+
 
 //RENDER FUNCTION occurs after "submit form"
 function render(){
@@ -142,6 +150,7 @@ function pushCard(x,y){
   state.cards.push(obj);
   state.currentindex = state.cards.length-1;
   }
+  localStorage.setItem("cards", JSON.stringify(state.cards));
 }
 //validation and alert
 //validation

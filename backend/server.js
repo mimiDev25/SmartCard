@@ -4,7 +4,7 @@ const path = require("path");
 
 const server = http.createServer((req, res)=>{
     console.log(req.method, req.url);
-    let filePath = "../frontend" + (req.url === "/" ? "/index.html" : req.url);
+    let filePath = ".." + (req.url === "/" ? "/index.html" : req.url);
 
     const ext = path.extname(filePath);
 
