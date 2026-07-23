@@ -109,7 +109,7 @@ const state = {
 const saved = JSON.parse(localStorage.getItem("cards"));
 if (saved){
   state.cards = saved;
-  state.currentindex = 0;
+  state.currentindex = state.cards.length-1;
   render();
 };
 
